@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // قراءه معلومات قاعدة البيانات من متغيرات البيئة
+    // قراءة معلومات قاعدة البيانات من متغيرات البيئة
     $host = getenv("DB_HOST");
     $db = getenv("DB_NAME");
     $user = getenv("DB_USER");
@@ -14,9 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!$conn) {
         die("فشل الاتصال بقاعدة البيانات.");
     }
+
     // دوال آمنة
-    function safeString($key) {
-        return isset($_POST[$key]) && $_POST[$key] !== '' ? "'" . pg_escape_string($_POST[$key]) . "'" : "NULL";
+    function safeString($key, $conn) {
+        return isset($_POST[$key]) && $_POST[$key] !== '' ? "'" . pg_escape_string($conn, $_POST[$key]) . "'" : "NULL";
     }
 
     function safeInt($key) {
@@ -30,55 +31,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // رفع الصور
     $uploads_dir = 'uploads';
     function handleUpload($file_input_name) {
-        global $uploads_dir;
+        global $uploads_dir, $conn;
         if (isset($_FILES[$file_input_name]) && $_FILES[$file_input_name]['error'] === UPLOAD_ERR_OK) {
             $tmp_name = $_FILES[$file_input_name]['tmp_name'];
             $name = basename($_FILES[$file_input_name]['name']);
-            $target_path = "$uploads_dir/" . uniqid() . "_" . $name; // لتجنب التكرار
+            $target_path = "$uploads_dir/" . uniqid() . "_" . $name;
             if (move_uploaded_file($tmp_name, $target_path)) {
-                return "'" . pg_escape_string($target_path) . "'";
+                return "'" . pg_escape_string($conn, $target_path) . "'";
             }
         }
         return "NULL";
     }
 
     // استدعاء القيم من النموذج
-    $child_name             = safeString('child_name');
+    $child_name             = safeString('child_name', $conn);
     $birth_date             = safeDate('birth_date');
-    $birth_place            = safeString('birth_place');
-    $nationality            = safeString('nationality');
-    $religion               = safeString('religion');
-    $residence              = safeString('residence');
-    $home_phone             = safeString('home_phone');
-    $mother_phone           = safeString('mother_phone');
-    $father_phone           = safeString('father_phone');
+    $birth_place            = safeString('birth_place', $conn);
+    $nationality            = safeString('nationality', $conn);
+    $religion               = safeString('religion', $conn);
+    $residence              = safeString('residence', $conn);
+    $home_phone             = safeString('home_phone', $conn);
+    $mother_phone           = safeString('mother_phone', $conn);
+    $father_phone           = safeString('father_phone', $conn);
     $brothers               = safeInt('brothers');
     $sisters                = safeInt('sisters');
-    $child_order            = safeString('child_order');
-    $father_job             = safeString('father_job');
-    $father_workplace       = safeString('father_workplace');
-    $father_work_phone      = safeString('father_work_phone');
-    $mother_job             = safeString('mother_job');
-    $mother_workplace       = safeString('mother_workplace');
-    $mother_work_phone      = safeString('mother_work_phone');
-    $emergency_contact      = safeString('emergency_contact');
-    $child_lives_with       = safeString('child_lives_with');
-    $parents_status         = safeString('parents_status');
-    $chronic_diseases       = safeString('chronic_diseases');
-    $food_allergy_details   = safeString('food_allergy_details');
-    $other_disease_details  = safeString('other_disease_details');
-    $had_surgery            = safeString('had_surgery');
-    $surgery_description    = safeString('surgery_description');
-    $takes_medicine         = safeString('takes_medicine');
-    $medicine_info          = safeString('medicine_info');
-    $vaccinations           = safeString('vaccinations');
-    $has_needs              = safeString('has_needs');
-    $needs_description      = safeString('needs_description');
-    $family_needs           = safeString('family_needs');
+    $child_order            = safeString('child_order', $conn);
+    $father_job             = safeString('father_job', $conn);
+    $father_workplace       = safeString('father_workplace', $conn);
+    $father_work_phone      = safeString('father_work_phone', $conn);
+    $mother_job             = safeString('mother_job', $conn);
+    $mother_workplace       = safeString('mother_workplace', $conn);
+    $mother_work_phone      = safeString('mother_work_phone', $conn);
+    $emergency_contact      = safeString('emergency_contact', $conn);
+    $child_lives_with       = safeString('child_lives_with', $conn);
+    $parents_status         = safeString('parents_status', $conn);
+    $chronic_diseases       = safeString('chronic_diseases', $conn);
+    $food_allergy_details   = safeString('food_allergy_details', $conn);
+    $other_disease_details  = safeString('other_disease_details', $conn);
+    $had_surgery            = safeString('had_surgery', $conn);
+    $surgery_description    = safeString('surgery_description', $conn);
+    $takes_medicine         = safeString('takes_medicine', $conn);
+    $medicine_info          = safeString('medicine_info', $conn);
+    $vaccinations           = safeString('vaccinations', $conn);
+    $has_needs              = safeString('has_needs', $conn);
+    $needs_description      = safeString('needs_description', $conn);
+    $family_needs           = safeString('family_needs', $conn);
     $family_needs_count     = safeInt('family_needs_count');
-    $family_needs_type      = safeString('family_needs_type');
-    $previous_kindergarten  = safeString('previous_kindergarten');
-    $previous_kg_name       = safeString('previous_kg_name');
+    $family_needs_type      = safeString('family_needs_type', $conn);
+    $previous_kindergarten  = safeString('previous_kindergarten', $conn);
+    $previous_kg_name       = safeString('previous_kg_name', $conn);
     $form_date              = safeDate('form_date');
 
     // رفع الصور
@@ -116,7 +117,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result) {
         header("Location: success.php");
         exit();
-
     } else {
         echo "<script>alert('❌ حدث خطأ أثناء حفظ البيانات');</script>";
         echo pg_last_error($conn);
@@ -125,6 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     pg_close($conn);
 }
 ?>
+
 
 
 <!DOCTYPE html>
