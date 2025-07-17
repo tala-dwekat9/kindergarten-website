@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>روضة طيور الجنة - النظام الإداري</title>
+
+    <!-- خطوط جوجل -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- أيقونات فونت أويسوم -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- أنيميشن -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #f3f2f2;
+            --accent: #ffffff;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--gradient);
+            color: var(--light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        /* تأثيرات الخلفية المتطورة */
+        .bg-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* كارت الدخول المميز */
+        .login-container {
+            width: 100%;
+            max-width: 500px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .login-card {
+            width: 100%;
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 25px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow),
+            0 0 50px rgba(106, 17, 203, 0.3),
+            inset 0 0 20px rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: cardEntrance 1s ease-out forwards;
+        }
+
+        @keyframes cardEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(50px) rotateX(30deg) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0) scale(1);
+            }
+        }
+
+        .login-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(-5deg);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4),
+            0 0 60px rgba(106, 17, 203, 0.4);
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                    to bottom right,
+                    rgba(255,255,255,0.15) 0%,
+                    rgba(255,255,255,0) 60%
+            );
+            transform: rotate(30deg);
+            z-index: -1;
+            animation: shine 6s infinite;
+        }
+
+        @keyframes shine {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* الشعار المميز */
+        .logo-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            transform-style: preserve-3d;
+            animation: floatLogo 6s ease-in-out infinite;
+        }
+
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0) rotateY(0); }
+            50% { transform: translateY(-20px) rotateY(10deg); }
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3),
+            inset 0 0 20px rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                    transparent 0deg,
+                    rgba(255,255,255,0.4) 90deg,
+                    transparent 180deg,
+                    rgba(255,255,255,0.4) 270deg,
+                    transparent 360deg
+            );
+            animation: rotate 6s linear infinite;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            inset: 5px;
+            background: var(--gradient);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .logo i {
+            font-size: 4rem;
+            color: white;
+            z-index: 3;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease;
+        }
+
+        .logo-container:hover .logo i {
+            transform: scale(1.1) rotate(10deg);
+            text-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .logo-shadow {
+            position: absolute;
+            bottom: -15px;
+            left: 15%;
+            width: 70%;
+            height: 20px;
+            background: radial-gradient(ellipse at center,
+            rgba(0,0,0,0.4) 0%,
+            transparent 70%);
+            border-radius: 50%;
+            filter: blur(5px);
+            z-index: 1;
+            animation: shadowPulse 6s ease-in-out infinite;
+        }
+
+        @keyframes shadowPulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(0.9); opacity: 0.4; }
+        }
+
+        /* العنوان المميز */
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding-bottom: 10px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            border-radius: 3px;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s ease;
+        }
+
+        .login-card:hover h1::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* حقول الإدخال المطورة */
+        .input-group {
+            margin: 30px 0;
+            text-align: right;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--light);
+            font-size: 1.1rem;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 18px 25px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            font-size: 1.1rem;
+            color: white;
+            outline: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2),
+            0 2px 0 rgba(255, 255, 255, 0.05);
+            transform-style: preserve-3d;
+        }
+
+        .input-field::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(255, 78, 80, 0.3),
+            inset 0 2px 5px rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.35);
+            transform: translateY(-5px);
+        }
+
+        .input-field:focus::placeholder {
+            opacity: 0.3;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus ~ .input-icon {
+            color: var(--accent);
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        /* الأزرار المطورة */
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            transform-style: preserve-3d;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) rotateX(5deg);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn:active {
+            transform: translateY(0) rotateX(0);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn i {
+            font-size: 1.3rem;
+            transition: all 0.4s ease;
+        }
+
+        .btn:hover i {
+            transform: scale(1.3);
+        }
+
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgb(243, 7, 7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 78, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 78, 80, 0); }
+        }
+
+        /* الفوتر المطور */
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 25px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        /* تأثيرات التنبيهات المطورة */
+        .alert {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            padding: 18px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            animation: alertEntrance 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+            alertExit 0.5s 2.5s forwards;
+            transform-origin: top right;
+            max-width: 400px;
+            opacity: 0;
+            transform: translateY(-30px) scale(0.9);
+        }
+
+        @keyframes alertEntrance {
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes alertExit {
+            from { opacity: 1; transform: translateY(0) scale(1); }
+            to { opacity: 0; transform: translateY(-30px) scale(0.9); }
+        }
+
+        .alert-success {
+            background: rgba(39, 174, 96, 0.85);
+            border-left: 5px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .alert-error {
+            background: rgb(243, 7, 7);
+            border-left: 5px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .alert i {
+            font-size: 1.5rem;
+        }
+
+        /* تأثير اهتزاز مطور */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+
+        /* تأثيرات إضافية */
+        .glow {
+            animation: glow 3s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+            to { box-shadow: 0 0 25px rgba(255, 255, 255, 0.6); }
+        }
+
+        /* تأثيرات للشاشات الكبيرة */
+        @media (min-width: 768px) {
+            .login-card {
+                padding: 50px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .btn {
+                flex: 1;
+                max-width: 220px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<!-- تأثيرات الجسيمات في الخلفية -->
+<div class="bg-particles" id="particles"></div>
+
+<!-- كارت الدخول -->
+<div class="login-container">
+    <div class="login-card">
+        <!-- الشعار المميز -->
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-school"></i>
+            </div>
+            <div class="logo-shadow"></div>
+        </div>
+
+        <h1>النظام الإداري لروضة طيور الجنة</h1>
+
+        <!-- إدخال السنة -->
+        <div class="input-group">
+            <label for="yearInput">السنة الدراسية</label>
+            <input type="text" id="yearInput" class="input-field" placeholder="أدخل السنة (مثال: 2024-2025)" autocomplete="off">
+            <i class="fas fa-calendar-alt input-icon"></i>
+        </div>
+
+        <!-- الأزرار -->
+        <div class="buttons">
+            <button class="btn btn-primary" onclick="createYear()">
+                <i class="fas fa-plus-circle"></i>
+                إنشاء سنة جديدة
+            </button>
+            <button class="btn btn-secondary" onclick="searchYear()">
+                <i class="fas fa-search"></i>
+                بحث عن سنة
+            </button>
+        </div>
+
+        <!-- الفوتر -->
+        <div class="footer">
+            روضة طيور الجنة &copy; <span id="currentYear"></span> - جميع الحقوق محفوظة
+        </div>
+    </div>
+</div>
+
+<!-- البرمجة المطورة -->
+<script>
+    // تحديث السنة الحالية في الفوتر
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // إنشاء جسيمات الخلفية
+    function createParticles() {
+        const container = document.getElementById('particles');
+        const particleCount = window.innerWidth < 768 ? 15 : 30;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+
+            // أحجام عشوائية
+            const size = Math.random() * 20 + 5;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+
+            // مواقع عشوائية
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+
+            // تأخيرات عشوائية
+            particle.style.animationDuration = `${Math.random() * 15 + 10}s`;
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+
+            container.appendChild(particle);
+        }
+    }
+
+    // تنفيذ عند تحميل الصفحة
+    window.addEventListener('load', () => {
+        createParticles();
+
+        // تأثير ظهور تدريجي للعناصر
+        const elements = document.querySelectorAll('.logo-container, h1, .input-group, .buttons, .footer');
+        elements.forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = `all 0.6s ease ${index * 0.1 + 0.3}s`;
+
+            setTimeout(() => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    });
+
+    const yearRegex = /^\d{4}-\d{4}$/;
+
+    // عرض التنبيهات المطورة
+    function showAlert(message, isSuccess = false) {
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert ${isSuccess ? 'alert-success' : 'alert-error'}`;
+        alertDiv.innerHTML = `
+            <i class="fas ${isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+            <span>${message}</span>
+        `;
+
+        document.body.appendChild(alertDiv);
+
+        setTimeout(() => {
+            alertDiv.remove();
+        }, 3000);
+    }
+
+    // إنشاء سنة مع تأثيرات محسنة
+    function createYear() {
+        const year = document.getElementById("yearInput").value.trim();
+        if (!yearRegex.test(year)) {
+            showAlert("يرجى إدخال السنة بصيغة صحيحة مثل: 2024-2025");
+
+            const inputGroup = document.querySelector('.input-group');
+            inputGroup.classList.add('shake');
+
+            // تأثير اهتزاز للأيقونة
+            const icon = document.querySelector('.input-icon');
+            icon.style.animation = 'shake 0.5s';
+
+            setTimeout(() => {
+                inputGroup.classList.remove('shake');
+                icon.style.animation = '';
+            }, 500);
+
+            return;
+        }
+
+        let years = JSON.parse(localStorage.getItem("schoolYears")) || [];
+
+        if (years.includes(year)) {
+            showAlert("السنة موجودة مسبقاً!");
+
+            // تأثير نبض للأيقونة
+            const icon = document.querySelector('.input-icon');
+
+        } else {
+            years.push(year);
+            localStorage.setItem("schoolYears", JSON.stringify(years));
+            showAlert("تم إنشاء السنة بنجاح!", true);
+            document.getElementById("yearInput").value = '';
+
+            // تأثيرات بعد الإنشاء
+            const card = document.querySelector('.login-card');
+            card.style.animation = 'cardEntrance 0.6s';
+
+            // تأثير نجمة للأيقونة
+            const icon = document.querySelector('.input-icon');
+            icon.innerHTML = '<i class="fas fa-star"></i>';
+            icon.style.color = 'gold';
+            icon.style.textShadow = '0 0 10px gold';
+
+            setTimeout(() => {
+                card.style.animation = '';
+                icon.innerHTML = '<i class="fas fa-calendar-alt"></i>';
+                icon.style.color = '';
+                icon.style.textShadow = '';
+            }, 1000);
+        }
+    }
+
+    // البحث عن سنة مع تأثيرات محسنة
+    function searchYear() {
+        const year = document.getElementById("yearInput").value.trim();
+        if (!yearRegex.test(year)) {
+            showAlert("يرجى إدخال السنة بصيغة صحيحة مثل: 2024-2025");
+
+            const inputGroup = document.querySelector('.input-group');
+            inputGroup.classList.add('shake');
+
+            setTimeout(() => {
+                inputGroup.classList.remove('shake');
+            }, 500);
+
+            return;
+        }
+
+        let years = JSON.parse(localStorage.getItem("schoolYears")) || [];
+
+        if (years.includes(year)) {
+            // تأثيرات قبل التوجيه
+            const card = document.querySelector('.login-card');
+            card.style.animation = 'cardEntrance 0.6s reverse forwards';
+
+            // تأثير تحميل للأيقونة
+            const icon = document.querySelector('.input-icon');
+            icon.style.animation = 'rotate 1s linear infinite';
+
+            setTimeout(() => {
+                window.location.href = "dashboard.html?year=" + encodeURIComponent(year);
+            }, 600);
+        } else {
+            showAlert("السنة غير موجودة. يرجى إنشاؤها أولاً.");
+
+            // تأثير اهتزاز للأيقونة
+            const icon = document.querySelector('.input-icon');
+            icon.style.animation = 'shake 0.5s';
+            setTimeout(() => { icon.style.animation = ''; }, 500);
+        }
+    }
+
+    // تأثيرات تفاعلية للحقل عند التركيز
+    const yearInput = document.getElementById('yearInput');
+    yearInput.addEventListener('focus', () => {
+        const inputGroup = document.querySelector('.input-group');
+        inputGroup.style.transform = 'translateY(-5px)';
+        inputGroup.style.transition = 'all 0.4s ease';
+
+        const icon = document.querySelector('.input-icon');
+        icon.style.color = 'var(--accent)';
+        icon.style.transform = 'translateY(-50%) scale(1.2)';
+    });
+
+    yearInput.addEventListener('blur', () => {
+        const inputGroup = document.querySelector('.input-group');
+        inputGroup.style.transform = 'translateY(0)';
+
+        const icon = document.querySelector('.input-icon');
+        icon.style.color = 'rgba(255, 255, 255, 0.6)';
+        icon.style.transform = 'translateY(-50%) scale(1)';
+    });
+
+    // تحسين تجربة المستخدم - إدخال بالإنتر
+    yearInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            const activeBtn = document.activeElement;
+            if (activeBtn && activeBtn.onclick) {
+                activeBtn.onclick();
+            } else {
+                createYear(); // الإفتراضي عند الضغط على إنتر
+            }
+        }
+    });
+
+    // تأثيرات عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            document.querySelector('.login-card').classList.add('animate__animated', 'animate__fadeInUp');
+        }, 100);
+    });
+</script>
+</body>
+</html>

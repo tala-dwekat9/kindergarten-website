@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>روضة طيور الجنة | روضة أطفال مميزة</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Tajawal', 'Amiri', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f9f0ff 0%, #e6d4ff 100%);
+      color: #333;
+      min-height: 100vh;
+      overflow-x: hidden;
+
+    }
+
+    /* تمت إضافة هذا الجزء فقط هنا لتأكيد التجاوب الكامل */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+      }
+
+      .logo-container {
+        width: 100px;
+        height: 100px;
+      }
+
+      .header-brand-info h1 {
+        font-size: 1.8rem;
+      }
+
+      .contact-info {
+        flex-direction: column;
+        font-size: 1rem;
+        gap: 5px;
+      }
+
+      .social-icons {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .social-icons a {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+      }
+    }
+
+    @keyframes rise {
+      0% { bottom: -100px; transform: translateX(0) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.8; }
+      50% { transform: translateX(-50px) rotate(180deg); }
+      100% { bottom: 100%; transform: translateX(50px) rotate(360deg); opacity: 0; }
+    }
+
+    header {
+      position: relative;
+      background: linear-gradient(135deg, rgba(243, 229, 255, 0.95) 0%, rgba(224, 195, 252, 0.95) 100%);
+      padding: 1rem 2rem; /* تم تصغير الحشوة */
+      box-shadow: 0 8px 30px rgba(123, 44, 191, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 4px solid #9c4dff; /* تم تقليل سماكة الحد */
+      z-index: 10;
+      backdrop-filter: blur(8px);
+      border-radius: 0 0 20px 20px;
+      margin: 0 2rem;
+      max-width: calc(100% - 4rem);
+    }
+
+    header::before {
+      content: "";
+
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%239c4dff15"><path d="M30,10 Q50,5 70,10 T90,30 Q95,50 90,70 T70,90 Q50,95 30,90 T10,70 Q5,50 10,30 T30,10Z"/></svg>');
+      background-size: 150px;
+      opacity: 0.4;
+      z-index: -1;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      z-index: 1;
+      flex-direction: column;
+    }
+
+    .logo-container {
+      margin-left: auto;
+      margin-right: 0;
+      width: 170px;
+      height: 170px; /* جعل العرض والارتفاع متساويين لتكوين دائرة */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%; /* هذا يحول الحاوية إلى شكل دائري */
+      overflow: hidden;   /* إخفاء أي جزء خارج الدائرة */
+      background-color: white; /* لون الخلفية داخل الدائرة */
+      box-shadow: 0 4px 10px rgba(123, 44, 191, 0.3); /* ظل بسيط */
+    }
+    .logo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* تعبئة كاملة للدائرة */
+      filter: drop-shadow(0 4px 8px rgba(123, 44, 191, 0.4));
+      transition: all 0.5s ease;
+      position: relative;
+      z-index: 2;
+    }
+    .logo-glow {
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(circle, rgba(156, 77, 255, 0.3) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: pulse-glow 3s infinite alternate;
+      z-index: 1;
+    }
+
+
+    @keyframes pulse-glow {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      100% { transform: scale(1.1); opacity: 0.9; }
+    }
+
+    .header-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 20px;
+      padding: 10px;
+      z-index: 1;
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .header-brand-info h1 {
+      margin: 0;
+      font-size: 2.8rem; /* تم تصغير حجم الخط */
+      color: #5a189a;
+      font-weight: 900;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+      font-family: 'Amiri', serif;
+      position: relative;
+      display: inline-block;
+      animation: pulse 3s infinite;
+      background: linear-gradient(135deg, #7b2cbf 0%, #3c096c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding: 0 10px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .header-brand-info h1::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20" fill="%239c4dff30"><path d="M0,10 Q25,20 50,10 T100,10"/></svg>');
+      background-repeat: repeat-x;
+      background-size: 100px 20px;
+      z-index: -1;
+    }
+
+    .header-brand-info h1::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      right: 0;
+      width: 60%;
+      height: 4px;
+      background: linear-gradient(to right, #9c4dff, #e0c3fc, #9c4dff);
+      border-radius: 4px;
+      animation: underlineGrow 2s ease-out;
+      box-shadow: 0 2px 5px rgba(156, 77, 255, 0.5);
+    }
+
+    @keyframes underlineGrow {
+      from { width: 0; opacity: 0; }
+      to { width: 60%; opacity: 1; }
+    }
+
+    .contact-info {
+      font-size: 1.2rem; /* تم تصغير حجم الخط */
+      color: #5a189a;
+      margin-top: 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-family: 'Reem Kufi', sans-serif;
+    }
+
+    .contact-info i {
+      color: #7b2cbf;
+      animation: shake 2s infinite;
+      font-size: 1.3rem;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(10deg); }
+      75% { transform: rotate(-10deg); }
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 12px; /* تم تقليل الفجوة */
+      z-index: 1;
+    }
+
+    .social-icons a {
+      text-decoration: none;
+      color: white;
+      background: linear-gradient(135deg, #9c4dff 0%, #7b2cbf 100%);
+      border-radius: 15px;
+      width: 50px; /* تم تصغير حجم الأيقونات */
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem; /* تم تصغير حجم الخط */
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 6px 15px rgba(123, 44, 191, 0.4);
+
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .social-icons a::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: 0.6s;
+    }
+
+    .social-icons a:hover {
+      transform: translateY(-5px) scale(1.15);
+      box-shadow: 0 10px 20px rgba(123, 44, 191, 0.6);
+    }
+
+    .social-icons a:hover::before {
+      left: 100%;
+    }
+
+    .social-icons a:nth-child(1) { background: linear-gradient(135deg, #4267B2 0%, #3b5998 100%); border-radius: 50% 50% 50% 0; }
+    .social-icons a:nth-child(2) { background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%); border-radius: 50% 0 50% 50%; }
+    .social-icons a:nth-child(3) { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); border-radius: 50% 50% 0 50%; }
+    .social-icons a:nth-child(4) { background: linear-gradient(135deg, #9c4dff 0%, #7b2cbf 100%); border-radius: 50%; }
+
+    /* Floating elements styles ... (no changes here) */
+    .floating-clouds, .floating-hearts { display: none; } /* Hide for simplicity during edit, can be re-enabled */
+
+
+    /* *** START OF KEY CHANGES *** */
+
+    /* تصميم جديد لرسوم التسجيل والقسط */
+    .pricing-container {
+      display: flex;
+      flex-direction: row; /* ★★★ تغيير رئيسي: الوضع الأفقي للبطاقات */
+      gap: 15px; /* تم تقليل الفجوة */
+      z-index: 20;
+      margin-top: 10px; /* تم تقليل المسافة العلوية */
+      align-items: center;
+      justify-content: center;
+    }
+
+    .price-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 230, 255, 0.9) 100%);
+      padding: 10px 10px; /* تم تصغير الحشوة */
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(123, 44, 191, 0.3);
+      text-align: center;
+      min-width: 180px; /* تم تعديل العرض الأدنى */
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(156, 77, 255, 0.3);
+      transition: all 0.4s ease;
+      animation: float-card 4s ease-in-out infinite alternate;
+    }
+
+    /* *** END OF KEY CHANGES *** */
+
+
+    .price-card:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+
+    @keyframes float-card {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); } /* تم تقليل الحركة */
+    }
+
+    .price-card:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(123, 44, 191, 0.4);
+    }
+
+    .price-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%239c4dff10"><path d="M30,10 Q50,5 70,10 T90,30 Q95,50 90,70 T70,90 Q50,95 30,90 T10,70 Q5,50 10,30 T30,10Z"/></svg>');
+      background-size: 80px;
+      opacity: 0.5;
+      z-index: -1;
+    }
+
+    .price-title {
+      font-size: 1rem; /* تم تصغير حجم الخط */
+      color: #5a189a;
+      font-weight: 700;
+      margin-bottom: 5px; /* تم تقليل الهامش */
+      font-family: 'Reem Kufi', sans-serif;
+
+      display: inline-block;
+    }
+
+    .price-title::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      right: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #9c4dff, transparent);
+      border-radius: 2px;
+    }
+
+    .price-value {
+      font-size: 1.6rem; /* تم تصغير حجم الخط */
+      font-weight: 900;
+      color: #7b2cbf;
+      background: linear-gradient(135deg, #9c4dff 0%, #7b2cbf 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      display: inline-block;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .price-value::after {
+      content: "شيكل";
+      font-size: 0.9rem; /* تم تصغير حجم الخط */
+      font-weight: 600;
+      color: #5a189a;
+      position: absolute;
+      left: -32px; /* تم تعديل الموضع */
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .price-note {
+      font-size: 0.8rem; /* تم تصغير حجم الخط */
+      color: #666;
+      margin-top: 5px;
+      font-style: italic;
+    }
+
+    .price-icon {
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      font-size: 2.5rem;
+      color: rgba(156, 77, 255, 0.2);
+      z-index: -1;
+    }
+
+    .price-card::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, #9c4dff, #e0c3fc, #9c4dff);
+      animation: rainbow-border 3s linear infinite;
+      background-size: 200% 100%;
+    }
+
+    @keyframes rainbow-border {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .star {
+      position: absolute;
+      color: #ffd700;
+      font-size: 1rem;
+      animation: twinkle 2s infinite alternate;
+      opacity: 0;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* تعديلات للشاشات الصغيرة */
+    @media (max-width: 1200px) {
+      .pricing-container {
+        flex-wrap: wrap; /* السماح للبطاقات بالالتفاف في الشاشات الأصغر */
+      }
+    }
+
+    @media (max-width: 992px) {
+      header {
+        padding: 1.5rem 2rem;
+        margin: 0 1rem;
+        max-width: calc(100% - 2rem);
+      }
+      .header-brand-info h1 { font-size: 2.5rem; }
+      .social-icons a { width: 50px; height: 50px; font-size: 1.3rem; }
+      .price-card { min-width: 180px; padding: 12px 20px; }
+      .price-value { font-size: 1.6rem; }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem 1.5rem;
+        text-align: center;
+        border-radius: 0 0 15px 15px;
+        margin: 0;
+        max-width: 100%;
+      }
+      .header-brand-info h1 { font-size: 2.2rem; }
+      .header-brand-info h1::after { right: 20%; width: 60%; }
+      .social-icons { justify-content: center; flex-wrap: wrap; }
+      .header-right { justify-content: center; }
+      .logo-container { width: 80px; height: 80px; }
+      .contact-info { font-size: 1.1rem; }
+      .price-card { width: 80%; max-width: 250px; }
+      /* في الشاشات الصغيرة جدا، نرجع البطاقات تحت بعضها لتكون أوضح */
+      .pricing-container { flex-direction: column; gap: 1rem;}
+    }
+
+    @media (max-width: 480px) {
+      .header-brand-info h1 { font-size: 1.8rem; }
+      .contact-info { font-size: 1rem; flex-direction: column; gap: 5px; }
+      .social-icons a { width: 45px; height: 45px; font-size: 1.1rem; }
+      .price-card { padding: 10px 15px; min-width: 160px; width: 100%; }
+      .price-title { font-size: 1rem; }
+      .price-value { font-size: 1.4rem; }
+      .price-value::after { font-size: 0.8rem; left: -30px; }
+    }
+  </style>
+</head>
+<body>
+<!-- Background elements ... (HTML unchanged) -->
+<div class="bubbles">
+  <div class="bubble"></div> <div class="bubble"></div> <div class="bubble"></div> <div class="bubble"></div> <div class="bubble"></div> <div class="bubble"></div> <div class="bubble"></div>
+</div>
+<header>
+  <div class="header-right">
+    <div class="logo-container">
+      <div class="logo-glow"></div>
+      <img src="img/logo.jpg" alt="لوجو روضة طيور الجنة" class="logo" />
+    </div>
+    <div class="star" style="top: 5px; left: 10px; animation-delay: 0.3s;">
+      <i class="fas fa-star"></i>
+    </div>
+    <div class="star" style="bottom: 10px; right: 15px; animation-delay: 0.7s;">
+      <i class="fas fa-star"></i>
+    </div>
+  </div>
+
+  <div class="header-center">
+    <div class="header-brand-info">
+      <h1>روضة طيور الجنة - بيتا</h1>
+      <div class="contact-info">
+        <i class="fas fa-phone-alt"></i>
+        للتواصل: 0597145645
+      </div>
+    </div>
+  </div>
+
+  <div class="social-icons">
+    <a href="https://www.facebook.com/people/%D8%B1%D9%88%D8%B6%D8%A9-%D8%B7%D9%8A%D9%88%D8%B1-%D8%A7%D9%84%D8%A7%D9%84%D8%AC%D9%86%D9%87-%D8%A8%D9%8A%D8%AA%D8%A7/100068442215894/" target="_blank" title="فيسبوك الروضة">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://www.youtube.com/channel/UCsS7TLhe9qXpnW4H6eSFhEQ" target="_blank" title="يوتيوب">
+      <i class="fab fa-youtube"></i>
+    </a>
+    <a href="https://wa.me/972597145645" target="_blank" title="واتساب">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="https://www.facebook.com/sss.wseem" target="_blank" title="فيسبوك الشخصي">
+      <i class="fa fa-user"></i>
+    </a>
+  </div>
+</header>
+
+
+</body>
+</html>
