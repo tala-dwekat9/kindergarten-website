@@ -1,21 +1,11 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$conn = pg_connect("host=db.irzcbvhlgunokzxdmear.supabase.co port=5432 dbname=postgres user=postgres 
+password='waseemandwaseem@7-5-2015' sslmode=require");
 
-    // قراءة معلومات قاعدة البيانات من متغيرات البيئة
-    $host = getenv("DB_HOST");
-    $db = getenv("DB_NAME");
-    $user = getenv("DB_USER");
-    $password = getenv("DB_PASSWORD");
-    $port = getenv("DB_PORT");
+if (!$conn) {
+    die("❌ فشل الاتصال بقاعدة البيانات.");
 
-    // الاتصال بقاعدة البيانات
-    $conn = pg_connect("host=$host dbname=$db user=$user password=$password port=$port");
-
-    if (!$conn) {
-        die("فشل الاتصال بقاعدة البيانات.");
-    }
-
-    // دوال آمنة
+// دوال آمنة
     function safeString($key, $conn) {
         return isset($_POST[$key]) && $_POST[$key] !== '' ? "'" . pg_escape_string($conn, $_POST[$key]) . "'" : "NULL";
     }
