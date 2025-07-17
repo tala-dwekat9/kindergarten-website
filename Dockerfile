@@ -1,7 +1,12 @@
-FROM php:8.2-cli
+# استخدم صورة PHP الرسمية مع Apache
+FROM php:8.1-apache
 
-WORKDIR /var/www/html
+# تثبيت PostgreSQL ودعم pg_connect
+RUN apt-get update && apt-get install -y libpq-dev \
+    && docker-php-ext-install pgsql pdo_pgsql
 
-COPY . .
+# نسخ ملفات المشروع إلى مجلد السيرفر
+COPY . /var/www/html/
 
-CMD ["php", "-S", "0.0.0.0:10000", "-t", "."]
+# إعطاء صلاحيات للمجلد
+RUN chown -R www-data:www-data /var/www/html
